@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: fundaciones_colombia_postgres
+    environment:
+      POSTGRES_DB: fundaciones_colombia
+      POSTGRES_USER: fundaciones_user
+      POSTGRES_PASSWORD: fundaciones_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fundaciones_user -d fundaciones_colombia"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
