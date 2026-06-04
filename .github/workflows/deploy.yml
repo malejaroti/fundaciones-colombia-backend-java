@@ -19,6 +19,9 @@ jobs:
       - name: Build JAR
         run: ./mvnw clean package -DskipTests
 
+      - name: Find JAR file
+        run: echo "JAR_FILE=$(ls target/*.jar | grep -v original)" >> $GITHUB_ENV
+
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
         with:
@@ -28,4 +31,4 @@ jobs:
           environment_name: Fundaciones-colombia-api-springb-env
           region: eu-central-1
           version_label: ${{ github.sha }}
-          deployment_package: target/*.jar
+          deployment_package: ${{ env.JAR_FILE }}
