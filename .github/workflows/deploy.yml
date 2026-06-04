@@ -28,4 +28,4 @@ jobs:
           environment_name: Fundaciones-colombia-api-springb-env
           region: eu-central-1
           version_label: ${{ github.sha }}
-          deployment_package: target/myapp-0.0.1-SNAPSHOT.jar
+          deployment_package: target/*.jar
